@@ -1,6 +1,18 @@
 package com.example.mad_practical_6_data_and_file_storage_zheng_jj.week_6_whackamole_3_0;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteCursorDriver;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQuery;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,6 +48,38 @@ public class Main2Activity extends AppCompatActivity {
             Log.v(TAG, FILENAME + ": User already exist during new user creation!");
 
          */
+        final Button create = findViewById(R.id.createuser);
+        final Button backlogin = findViewById(R.id.backtologin);
+        final EditText name = findViewById(R.id.usernameenter);
+        final EditText password = findViewById(R.id.passwordenter);
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast msg = null;
+                String name2 = name.getText().toString();
+                String pass2 = password.getText().toString();
+                UserData createuser = new UserData(name2,pass2);
+                MyDBHandler db = new MyDBHandler(name.getContext(), "WhackAMole.db", null, 6);
+                if(db.findUser(name2).getMyUserName()==null) {
+                    db.addUser(createuser);
+                    msg.makeText(create.getContext(), "User created successfully!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(create.getContext(),MainActivity.class);
+                    db.close();
+                    create.getContext().startActivity(intent);
+                }
+                else{
+                    msg.makeText(create.getContext(), "User already exist!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+        backlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(create.getContext(),MainActivity.class);
+                create.getContext().startActivity(intent);
+            }
+        });
     }
 
     protected void onStop() {
