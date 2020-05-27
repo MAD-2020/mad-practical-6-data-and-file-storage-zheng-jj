@@ -1,0 +1,9 @@
+<application>
+  <component name="FileTypeManager" version="17">
+    <extensionMap>
+      <mapping ext="db" type="DBN-SQL" />
+      <mapping pattern="bottombar_tabs" type="XML" />
+      <removed_mapping ext="db" approved="true" type="Native" />
+    </extensionMap>
+  </component>
+</application>
