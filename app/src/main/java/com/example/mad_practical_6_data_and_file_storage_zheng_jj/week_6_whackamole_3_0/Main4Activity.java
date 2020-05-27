@@ -137,13 +137,7 @@ public class Main4Activity extends AppCompatActivity {
 
         final Runnable r = new Runnable() {
             public void run() {
-                //check if game has started
-                if (countdownactive!=true) {
-                    pertick(difficulty);
-                }
-                else{
-                    clearAllMoles();
-                }
+                pertick(difficulty);
             }
         };
         new Thread(r).start();
@@ -187,7 +181,12 @@ public class Main4Activity extends AppCompatActivity {
             @Override
             public void run() {
                 clearAllMoles();
-                setNewMole(difficulty);
+                if(countdownactive!=true) {
+                    setNewMole(difficulty);
+                }
+                else{
+                    clearAllMoles();
+                }
             }
         });
     }
