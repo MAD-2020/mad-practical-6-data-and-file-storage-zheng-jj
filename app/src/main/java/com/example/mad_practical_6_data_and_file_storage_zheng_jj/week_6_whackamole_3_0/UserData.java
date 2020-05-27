@@ -1,8 +1,12 @@
 package com.example.mad_practical_6_data_and_file_storage_zheng_jj.week_6_whackamole_3_0;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class UserData {
+public class UserData implements Parcelable {
 
     /* NOTE:
             THIS OBJECT DATA IS GIVEN.
@@ -18,8 +22,8 @@ public class UserData {
      */
     private String MyUserName;
     private String MyPassword;
-    private ArrayList<Integer> Scores = new ArrayList<>();
-    private ArrayList<Integer> Levels = new ArrayList<>();
+    private ArrayList<Integer> Scores;
+    private ArrayList<Integer> Levels;
 
     public UserData()
     {
@@ -31,6 +35,33 @@ public class UserData {
         this.Levels = myLevels;
         this.Scores = myScores;
     }
+    public UserData(String myUserName, String myPassword) {
+        this.MyUserName = myUserName;
+        this.MyPassword = myPassword;
+        this.Levels = new ArrayList<Integer>();
+        this.Scores = new ArrayList<Integer>();
+        for(Integer i = 0; i<10;i++){
+            this.Levels.add(i);
+            this.Scores.add(0);
+        }
+    }
+
+    protected UserData(Parcel in) {
+        MyUserName = in.readString();
+        MyPassword = in.readString();
+    }
+
+    public static final Creator<UserData> CREATOR = new Creator<UserData>() {
+        @Override
+        public UserData createFromParcel(Parcel in) {
+            return new UserData(in);
+        }
+
+        @Override
+        public UserData[] newArray(int size) {
+            return new UserData[size];
+        }
+    };
 
     public ArrayList<Integer> getLevels() {
         return this.Levels;
@@ -62,5 +93,17 @@ public class UserData {
 
     public void setMyPassword(String myPassword) {
         this.MyPassword = myPassword;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(MyUserName);
+        dest.writeString(MyPassword);
+
     }
 }
