@@ -2,7 +2,9 @@
   <component name="FileTypeManager" version="17">
     <extensionMap>
       <mapping ext="db" type="DBN-SQL" />
+      <mapping pattern="Images7112899519516798837bmp" type="Image" />
       <mapping pattern="bottombar_tabs" type="XML" />
+      <mapping pattern="Images7785118527832045914bmp" type="XML" />
       <removed_mapping ext="db" approved="true" type="Native" />
     </extensionMap>
   </component>
