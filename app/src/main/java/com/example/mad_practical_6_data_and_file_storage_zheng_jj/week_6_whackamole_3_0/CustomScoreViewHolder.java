@@ -15,6 +15,7 @@ public class CustomScoreViewHolder extends RecyclerView.ViewHolder {
     TextView Points;
     public CustomScoreViewHolder(final View itemView){
         super(itemView);
+
         Level = (TextView)itemView.findViewById(R.id.level);
         Points = (TextView)itemView.findViewById(R.id.highscore);
         /* Hint:
